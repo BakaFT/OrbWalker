@@ -69,6 +69,10 @@ bool script::is_reloading() { return game_time < last_attack_time + Object::self
 bool script::is_attacking() { return game_time < last_attack_time + Object::self()->AttackWindup(); }
 
 void script::idle() {
+  const auto buffs = Object().self()->buffs();
+  for (size_t i; i < buffs.size(); i++) {
+      MessageBoxA(NULL, buffs[i]->name().c_str(), "TEST", MB_OK);
+  }
   if (!is_attacking()) do_action(Move2Mouse);
 }
 
